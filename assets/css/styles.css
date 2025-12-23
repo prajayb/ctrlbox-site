@@ -1062,12 +1062,14 @@ textarea:focus {
 }
 
 .brand--footer .brand__logo {
-  width: 28px;
-  height: 28px;
+  width: 80px;
+  height: 55px;
 }
 
 .brand--footer .brand__wordmark {
-  height: 18px;
+  padding-top: 5px;
+  width: 265px;
+  height: 120px;
 }
 
 
