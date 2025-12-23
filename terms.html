@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms of Service | CtrlBox</title>
+  <meta name="description" content="CtrlBox Terms of Service" />
+  <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="CtrlBox Home"><img class="brand__logo" src="assets/img/ctrlbox-cube.png" alt="CtrlBox logo" /><img class="brand__wordmark" src="assets/img/ctrlbox-wordmark.png" alt="CTRLBOX" /></a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <div class="nav__scrim" id="navScrim" aria-hidden="true"></div>
+<a class="btn btn--ghost" href="index.html#contact">Contact</a>
+        <a class="btn btn--primary" href="index.html">Back to Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Terms of Service</h2>
+          <p class="muted">Last updated: <span id="lastUpdated"></span></p>
+        </div>
+
+        <div class="card">
+          <p class="muted">
+            This is a starter template terms page. Replace this content with your final legal text.
+          </p>
+
+          <h3>Services</h3>
+          <p class="muted">
+            CtrlBox provides digital marketing and related services (content, ads, websites, SEO, automation).
+            Specific deliverables, timelines, and pricing are confirmed in a written proposal or statement of work.
+          </p>
+
+          <h3>Payments</h3>
+          <ul class="checklist">
+            <li>Invoices are payable as agreed in your proposal</li>
+            <li>Late payments may pause delivery until cleared</li>
+            <li>Ad spend is separate from service fees unless stated</li>
+          </ul>
+
+          <h3>Client responsibilities</h3>
+          <ul class="checklist">
+            <li>Provide timely inputs, access, and approvals</li>
+            <li>Ensure you have rights to logos, images, and content supplied</li>
+          </ul>
+
+          <h3>Intellectual property</h3>
+          <p class="muted">
+            Unless stated otherwise, you own the final paid deliverables. We may showcase work in our portfolio unless
+            an NDA is in place.
+          </p>
+
+          <h3>Limitation</h3>
+          <p class="muted">
+            Marketing results depend on many factors (market, product, budget, competition). We do not guarantee specific outcomes.
+          </p>
+
+          <h3>Contact</h3>
+          <p class="muted">
+            Email: <a href="mailto:hello@ctrlbox.com">hello@ctrlbox.com</a>
+          </p>
+
+          <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn--ghost" href="privacy.html">Read Privacy</a>
+            <a class="btn btn--primary" href="index.html">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__bottom">
+      <span>© <span id="year"></span> CtrlBox. All rights reserved.</span>
+      <a href="#top" class="backtop">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector("#year").textContent = new Date().getFullYear();
+    document.querySelector("#lastUpdated").textContent = new Date().toLocaleDateString();
+  </script>
+</body>
+</html>

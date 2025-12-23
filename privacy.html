@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy | CtrlBox</title>
+  <meta name="description" content="CtrlBox Privacy Policy" />
+  <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="CtrlBox Home"><img class="brand__logo" src="assets/img/ctrlbox-cube.png" alt="CtrlBox logo" /><img class="brand__wordmark" src="assets/img/ctrlbox-wordmark.png" alt="CTRLBOX" /></a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <div class="nav__scrim" id="navScrim" aria-hidden="true"></div>
+<a class="btn btn--ghost" href="index.html#contact">Contact</a>
+        <a class="btn btn--primary" href="index.html">Back to Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Privacy Policy</h2>
+          <p class="muted">Last updated: <span id="lastUpdated"></span></p>
+        </div>
+
+        <div class="card">
+          <p class="muted">
+            This is a starter template privacy policy page. Replace this content with your final legal text.
+            If you operate in India/UAE, consider consulting a lawyer to align with local requirements.
+          </p>
+
+          <h3>Information we collect</h3>
+          <ul class="checklist">
+            <li>Contact details you submit (name, email, phone/WhatsApp)</li>
+            <li>Business links you share (Instagram/website)</li>
+            <li>Message content (goals, requirements)</li>
+          </ul>
+
+          <h3>How we use information</h3>
+          <ul class="checklist">
+            <li>To respond to your inquiry and provide proposals</li>
+            <li>To improve our services and communication</li>
+            <li>To send updates if you opt-in</li>
+          </ul>
+
+          <h3>Sharing</h3>
+          <p class="muted">
+            We do not sell your data. We may share information with tools/providers needed to deliver services
+            (e.g., email, CRM, analytics) under reasonable safeguards.
+          </p>
+
+          <h3>Cookies & analytics</h3>
+          <p class="muted">
+            If you enable analytics (Google Analytics/Meta Pixel), cookies may be used to measure performance.
+            You can disable analytics scripts if required.
+          </p>
+
+          <h3>Data retention</h3>
+          <p class="muted">
+            We retain information only as long as needed for the purposes above, or as required by law.
+          </p>
+
+          <h3>Your rights</h3>
+          <p class="muted">
+            You can request access, correction, or deletion of your submitted data by emailing us.
+          </p>
+
+          <h3>Contact</h3>
+          <p class="muted">
+            Email: <a href="mailto:hello@ctrlbox.com">hello@ctrlbox.com</a>
+          </p>
+
+          <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn--ghost" href="terms.html">Read Terms</a>
+            <a class="btn btn--primary" href="index.html">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__bottom">
+      <span>© <span id="year"></span> CtrlBox. All rights reserved.</span>
+      <a href="#top" class="backtop">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector("#year").textContent = new Date().getFullYear();
+    document.querySelector("#lastUpdated").textContent = new Date().toLocaleDateString();
+  </script>
+</body>
+</html>
