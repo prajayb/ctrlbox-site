@@ -1110,3 +1110,271 @@ textarea:focus {
 .price-card--featured {
   box-shadow: var(--shadow2);
 }
+
+
+/* Scroll Cube Effect */
+.scroll-cube{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 5; /* above hero, below header if header has higher z-index */
+  opacity: 1;
+  transition: opacity .2s ease;
+}
+
+.scroll-cube img{
+  width: min(520px, 72vw);
+  height: auto;
+
+  /* glow look */
+  filter: drop-shadow(0 0 30px rgba(0, 230, 118, 0.35))
+          drop-shadow(0 0 80px rgba(0, 230, 118, 0.25));
+
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+
+  /* Driven by JS variable --heroScroll (0 to 1) */
+  transform:
+    translateY(calc(var(--heroScroll, 0) * 40px))
+    scale(calc(1 - (var(--heroScroll, 0) * 0.35)))
+    rotateZ(calc(var(--heroScroll, 0) * 220deg))
+    rotateX(calc(var(--heroScroll, 0) * 18deg));
+
+  opacity: calc(1 - (var(--heroScroll, 0) * 0.9));
+}
+
+/* Optional: hide cube once hero scroll is done (JS adds .cube--hide) */
+.scroll-cube.cube--hide{ opacity: 0; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .scroll-cube img{
+    transform: none;
+    opacity: 0.15;
+  }
+}
+
+
+/* Ensure header stays above overlay */
+.header { position: sticky; top: 0; z-index: 20; }
+
+/* Hide the nav cube until animation completes (we'll show it at the end) */
+.brand__logo { opacity: 0; transition: opacity .2s ease; }
+.brand__logo.cube-ready { opacity: 1; }
+
+/* Scroll Cube Overlay (animated to navbar) */
+.scroll-cube{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15; /* below header (20) */
+  display: block;
+}
+
+.scroll-cube img{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(520px, 74vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+
+  filter:
+    drop-shadow(0 0 30px rgba(0,230,118,.35))
+    drop-shadow(0 0 90px rgba(0,230,118,.25));
+
+  /* driven by JS variables */
+  opacity: var(--cubeOpacity, 1);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .scroll-cube img{ display:none; }
+  .brand__logo{ opacity: 1; }
+}
+
+
+/* Header stays above */
+.header { position: sticky; top: 0; z-index: 50; }
+
+/* Hide nav cube until intro finishes */
+.brand__logo { opacity: 0; transition: opacity .2s ease; }
+.brand__logo.cube-ready { opacity: 1; }
+
+/* INTRO section takes full viewport */
+.intro{
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #000; /* match your theme */
+  overflow: hidden;
+}
+
+.intro__stage{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.intro__stage img{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(520px, 74vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+  opacity: var(--cubeOpacity, 1);
+
+  filter:
+    drop-shadow(0 0 30px rgba(0,230,118,.35))
+    drop-shadow(0 0 90px rgba(0,230,118,.25));
+}
+
+.intro__hint{
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  opacity: .85;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .intro__stage img{ display:none; }
+  .brand__logo{ opacity: 1; }
+}
+
+
+.header { position: sticky; top: 0; z-index: 50; }
+
+/* Hide nav cube until merge */
+.brand__logo { opacity: 0; transition: opacity .15s ease; }
+.brand__logo.cube-ready { opacity: 1; }
+
+.intro{
+  position: relative;
+  min-height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+/* FIX: stage is fixed so cube can merge with header instantly */
+.intro__stage{
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.intro__stage img{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(520px, 74vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+  opacity: var(--cubeOpacity, 1);
+
+  filter:
+    drop-shadow(0 0 30px rgba(0,230,118,.35))
+    drop-shadow(0 0 90px rgba(0,230,118,.25));
+}
+
+/* once intro done, we fully hide the fixed stage */
+.intro__stage.stage-hide{ opacity: 0; visibility: hidden; transition: opacity .2s ease; }
+
+/* Premium breathing glow during intro */
+@keyframes cubeGlow {
+  0%   { filter: drop-shadow(0 0 18px rgba(0,230,118,.25))
+                 drop-shadow(0 0 60px rgba(0,230,118,.18)); }
+  50%  { filter: drop-shadow(0 0 34px rgba(0,230,118,.45))
+                 drop-shadow(0 0 110px rgba(0,230,118,.30)); }
+  100% { filter: drop-shadow(0 0 18px rgba(0,230,118,.25))
+                 drop-shadow(0 0 60px rgba(0,230,118,.18)); }
+}
+
+.intro__stage img.is-breathing{
+  animation: cubeGlow 3.6s ease-in-out infinite;
+}
+
+
+
+/* ===== INTRO (Responsive) ===== */
+.intro{
+  position: relative;
+  min-height: 100svh; /* better for mobile address bar */
+  background: radial-gradient(ellipse at center, rgba(0,230,118,.12), transparent 55%),
+              #000;
+  overflow: hidden;
+}
+
+/* fixed stage for animation */
+.intro__stage{
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+}
+
+/* cube image responsive sizing */
+.intro__stage img{
+  width: clamp(160px, 55vw, 520px); /* mobile → desktop */
+  height: auto;
+  max-width: 92vw;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+  opacity: var(--cubeOpacity, 1);
+
+  filter:
+    drop-shadow(0 0 18px rgba(0,230,118,.25))
+    drop-shadow(0 0 70px rgba(0,230,118,.20));
+}
+
+/* Hint block stays inside safe-area */
+.intro__hint{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  text-align: center;
+  z-index: 2;
+  width: min(92vw, 420px);
+}
+
+/* On very small screens, reduce hint padding */
+@media (max-width: 380px){
+  .intro__hint .pill{ font-size: 12px; }
+  .intro__hint .muted{ font-size: 12px; }
+}
+
+/* When intro is done, hide stage */
+.intro__stage.stage-hide{
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease;
+}
+
+/* Make sure header is always above animation */
+.header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Nav logo show only after merge */
+.brand__logo{ opacity: 0; transition: opacity .15s ease; }
+.brand__logo.cube-ready{ opacity: 1; }

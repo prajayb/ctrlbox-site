@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>CtrlBox — Unbox the Unexpected | Digital Growth Partner</title>
   <meta name="description"
     content="CtrlBox is your digital growth partner. We build high-converting websites, run performance marketing, create scroll-stopping content, and automate growth with AI." />
@@ -57,10 +56,11 @@
   <header class="header">
     <div class="container header__inner">
       <a class="brand" href="#top" aria-label="CtrlBox Home">
-        <img class="brand__logo" src="assets/img/ctrlbox-cube.png"alt="CtrlBox logo" />
+        <img id="navCubeTarget" class="brand__logo" src="assets/img/ctrlbox-cube.png" alt="CtrlBox logo" />
+        <!-- <img class="brand__logo" src="assets/img/ctrlbox-cube.png"alt="CtrlBox logo" /> -->
         <img class="brand__wordmark" src="assets/img/ctrlbox-wordmark.png" alt="CTRLBOX" />
       </a>
-    
+
 
       <nav class="nav" aria-label="Primary navigation">
         <div class="nav__scrim" id="navScrim" aria-hidden="true"></div>
@@ -83,6 +83,17 @@
   </header>
 
   <main id="main">
+    <!-- INTRO SCROLL SECTION (cube animation only) -->
+    <section class="intro" id="intro">
+      <div class="intro__stage " aria-hidden="true">
+        <img id="scrollCubeImg" src="assets/img/ctrlboxNoBackground.png" alt="" />
+      </div>
+
+      <div class="intro__hint">
+        <span class="pill">CtrlBox</span>
+        <p class="muted">Scroll to unbox ↓</p>
+      </div>
+    </section>
     <section class="hero" id="top">
       <img class="hero__watermark" src="assets/img/ctrlbox-cube-glow.png" alt="" aria-hidden="true" />
       <div class="container hero__grid">
@@ -420,8 +431,9 @@
           </div>
 
           <div class="contact__direct">
-            <a class="btn btn--primary" href="https://wa.me/0000000000" target="_blank" rel="noreferrer">WhatsApp Us</a>
-            <a class="btn btn--ghost" href="mailto:hello@ctrlbox.com">hello@ctrlbox.com</a>
+            <a class="btn btn--primary" href="https://wa.me/+919148391386" target="_blank" rel="noreferrer">WhatsApp
+              Us</a>
+            <a class="btn btn--ghost" href="mailto:connect@ctrlbox.co.in">connect@ctrlbox.co.in</a>
           </div>
         </div>
 
@@ -436,7 +448,7 @@
           </label>
           <label>
             Phone / WhatsApp
-            <input name="phone" type="tel" placeholder="+91 / +971 ..." />
+            <input name="phone" type="tel" placeholder="+91..." />
           </label>
           <label>
             Your Instagram / Website
