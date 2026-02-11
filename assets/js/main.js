@@ -560,3 +560,45 @@ if (form && msg) {
   // start animation on load
   animateLoadToCenter();
 })();
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("leadForm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = form.querySelector('[name="name"]').value.trim();
+    const email = form.querySelector('[name="email"]').value.trim();
+    const phone = form.querySelector('[name="phone"]').value.trim();
+    const link = form.querySelector('[name="link"]').value.trim();
+    const goal = form.querySelector('[name="goal"]').value.trim();
+
+    if (!name || !email || !link || !goal) {
+      alert("Please fill all required fields.");
+      return;
+    }
+
+    const message = 
+`🚀 *New Growth Audit Request — CtrlBox*
+
+👤 Name: ${name}
+📧 Email: ${email}
+📱 Phone: ${phone}
+🌐 Instagram/Website: ${link}
+
+🎯 Goal:
+${goal}
+
+Sent from CtrlBox Website`;
+
+    const encodedMessage = encodeURIComponent(message);
+
+    const whatsappNumber = "919148391386"; // Without + sign
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    window.open(whatsappURL, "_blank");
+
+    form.reset();
+  });
+});
