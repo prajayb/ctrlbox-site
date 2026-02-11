@@ -1378,3 +1378,25 @@ textarea:focus {
 /* Nav logo show only after merge */
 .brand__logo{ opacity: 0; transition: opacity .15s ease; }
 .brand__logo.cube-ready{ opacity: 1; }
+
+
+.form__msg{
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+}
+
+.form__msg[data-type="error"]{
+  border-color: rgba(255,80,80,.35);
+  background: rgba(255,80,80,.12);
+}
+
+.form__msg[data-type="success"]{
+  border-color: rgba(0,230,118,.35);
+  background: rgba(0,230,118,.12);
+}

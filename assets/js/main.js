@@ -147,27 +147,27 @@ if (video && btnReel) {
   });
 }
 
-// Static form behavior (front-end validation only)
-const form = document.querySelector("#leadForm");
-const msg = document.querySelector("#formMsg");
+// // Static form behavior (front-end validation only)
+// const form = document.querySelector("#leadForm");
+// const msg = document.querySelector("#formMsg");
 
-if (form && msg) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+// if (form && msg) {
+//   form.addEventListener("submit", (e) => {
+//     e.preventDefault();
 
-    const data = new FormData(form);
-    const required = ["name", "email", "link", "goal"];
-    const missing = required.filter(k => !String(data.get(k) || "").trim());
+//     const data = new FormData(form);
+//     const required = ["name", "email", "link", "goal"];
+//     const missing = required.filter(k => !String(data.get(k) || "").trim());
 
-    if (missing.length) {
-      msg.textContent = "Please fill all required fields.";
-      return;
-    }
+//     if (missing.length) {
+//       msg.textContent = "Please fill all required fields.";
+//       return;
+//     }
 
-    msg.textContent = "✅ Received! (Static demo) Connect this form to Formspree/Netlify when ready.";
-    form.reset();
-  });
-}
+//     msg.textContent = "✅ Received! (Static demo) Connect this form to Formspree/Netlify when ready.";
+//     form.reset();
+//   });
+// }
 
 
 (function scrollCubeEffect(){
@@ -561,30 +561,40 @@ if (form && msg) {
   animateLoadToCenter();
 })();
 
-
-document.addEventListener("DOMContentLoaded", function () {
+// WhatsApp form submit (no alert, no conflict)
+(function leadFormToWhatsApp(){
   const form = document.getElementById("leadForm");
+  const msg = document.getElementById("formMsg");
+  if (!form) return;
+
+  function showMessage(text, type){
+    if (!msg) return;
+    msg.textContent = text;
+    msg.dataset.type = type || "info"; // we'll style via CSS
+  }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const name = form.querySelector('[name="name"]').value.trim();
-    const email = form.querySelector('[name="email"]').value.trim();
-    const phone = form.querySelector('[name="phone"]').value.trim();
-    const link = form.querySelector('[name="link"]').value.trim();
-    const goal = form.querySelector('[name="goal"]').value.trim();
+    const name = form.querySelector('[name="name"]')?.value.trim();
+    const email = form.querySelector('[name="email"]')?.value.trim();
+    const phone = form.querySelector('[name="phone"]')?.value.trim();
+    const link = form.querySelector('[name="link"]')?.value.trim();
+    const goal = form.querySelector('[name="goal"]')?.value.trim();
 
     if (!name || !email || !link || !goal) {
-      alert("Please fill all required fields.");
+      showMessage("Please fill all required fields (Name, Email, Instagram/Website, Goal).", "error");
       return;
     }
 
-    const message = 
+    showMessage("Opening WhatsApp…", "success");
+
+    const message =
 `🚀 *New Growth Audit Request — CtrlBox*
 
 👤 Name: ${name}
 📧 Email: ${email}
-📱 Phone: ${phone}
+📱 Phone: ${phone || "-"}
 🌐 Instagram/Website: ${link}
 
 🎯 Goal:
@@ -592,13 +602,16 @@ ${goal}
 
 Sent from CtrlBox Website`;
 
-    const encodedMessage = encodeURIComponent(message);
+    const whatsappNumber = "919148391386"; // no +
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-    const whatsappNumber = "919148391386"; // Without + sign
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    // Open WA in a new tab
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
 
-    window.open(whatsappURL, "_blank");
-
+    // Reset after opening
     form.reset();
+
+    // Optional: clear message after a few seconds
+    setTimeout(() => showMessage("", "info"), 3500);
   });
-});
+})();
