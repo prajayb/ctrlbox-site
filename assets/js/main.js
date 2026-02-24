@@ -3,7 +3,7 @@ const toggle = document.querySelector(".nav__toggle");
 const menu = document.querySelector("#navMenu");
 const scrim = document.querySelector("#navScrim");
 
-function openNav(){
+function openNav() {
   if (!menu || !toggle) return;
   menu.classList.add("is-open");
   if (scrim) scrim.classList.add("is-open");
@@ -11,7 +11,7 @@ function openNav(){
   document.body.classList.add("nav-open");
 }
 
-function closeNav(){
+function closeNav() {
   if (!menu || !toggle) return;
   menu.classList.remove("is-open");
   if (scrim) scrim.classList.remove("is-open");
@@ -19,7 +19,7 @@ function closeNav(){
   document.body.classList.remove("nav-open");
 }
 
-function toggleNav(){
+function toggleNav() {
   const isOpen = menu?.classList.contains("is-open");
   if (isOpen) closeNav(); else openNav();
 }
@@ -41,7 +41,7 @@ if (toggle && menu) {
 }
 
 
-function closeNav(){
+function closeNav() {
   if (!menu || !toggle) return;
   menu.classList.remove("is-open");
   if (scrim) scrim.classList.remove("is-open");
@@ -49,7 +49,7 @@ function closeNav(){
   document.body.classList.remove("nav-open");
 }
 
-function toggleNav(){
+function toggleNav() {
   const isOpen = menu?.classList.contains("is-open");
   if (isOpen) closeNav(); else openNav();
 }
@@ -170,22 +170,22 @@ if (video && btnReel) {
 // }
 
 
-(function scrollCubeEffect(){
+(function scrollCubeEffect() {
   const root = document.documentElement;
   const hero = document.querySelector('.hero');
   const cube = document.querySelector('.scroll-cube');
-  if(!hero || !cube) return;
+  if (!hero || !cube) return;
 
   let ticking = false;
   let heroHeight = 1;
 
-  function measure(){
+  function measure() {
     heroHeight = Math.max(hero.offsetHeight, 1);
   }
 
-  function clamp(v, min, max){ return Math.min(max, Math.max(min, v)); }
+  function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
 
-  function update(){
+  function update() {
     const y = window.scrollY || window.pageYOffset || 0;
     const p = clamp(y / (heroHeight * 0.9), 0, 1); // 0→1 in hero area
     root.style.setProperty('--heroScroll', p.toFixed(4));
@@ -197,8 +197,8 @@ if (video && btnReel) {
     ticking = false;
   }
 
-  function onScroll(){
-    if(ticking) return;
+  function onScroll() {
+    if (ticking) return;
     ticking = true;
     requestAnimationFrame(update);
   }
@@ -211,25 +211,25 @@ if (video && btnReel) {
 
 
 
-(function heroCubeToNavbar(){
+(function heroCubeToNavbar() {
   const hero = document.querySelector('.hero');
   const overlayImg = document.getElementById('scrollCubeImg');
   const navTarget = document.getElementById('navCubeTarget');
 
-  if(!hero || !overlayImg || !navTarget) return;
+  if (!hero || !overlayImg || !navTarget) return;
 
   const root = document.documentElement;
 
   // helpers
   const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
   const lerp = (a, b, t) => a + (b - a) * t;
-  const easeInOut = (t) => t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2;
+  const easeInOut = (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 
   let heroHeight = 1;
   let ticking = false;
 
   // "start" cube position (center of screen, big)
-  function getStart(){
+  function getStart() {
     return {
       x: window.innerWidth / 2,
       y: window.innerHeight / 2,
@@ -238,18 +238,18 @@ if (video && btnReel) {
   }
 
   // "end" cube position (center of navbar logo)
-  function getEnd(){
+  function getEnd() {
     const r = navTarget.getBoundingClientRect();
     const cx = r.left + r.width / 2;
     const cy = r.top + r.height / 2;
     return { x: cx, y: cy, size: Math.max(r.width, 1) };
   }
 
-  function measure(){
+  function measure() {
     heroHeight = Math.max(hero.offsetHeight, 1);
   }
 
-  function update(){
+  function update() {
     const y = window.scrollY || 0;
 
     // progress from 0→1 while scrolling through most of hero
@@ -279,13 +279,13 @@ if (video && btnReel) {
     // We keep base width via style width and use translate for centering
     overlayImg.style.width = w + "px";
     overlayImg.style.transform =
-      `translate(-50%, -50%) translate(${x - window.innerWidth/2}px, ${yy - window.innerHeight/2}px)
+      `translate(-50%, -50%) translate(${x - window.innerWidth / 2}px, ${yy - window.innerHeight / 2}px)
        rotateZ(${rotZ}deg) rotateX(${rotX}deg)`;
 
     root.style.setProperty('--cubeOpacity', opacity.toFixed(3));
 
     // Show the real nav logo at the end, hide overlay
-    if (raw >= 0.98){
+    if (raw >= 0.98) {
       navTarget.classList.add('cube-ready');
       overlayImg.style.opacity = "0";
     } else {
@@ -296,8 +296,8 @@ if (video && btnReel) {
     ticking = false;
   }
 
-  function onScroll(){
-    if(ticking) return;
+  function onScroll() {
+    if (ticking) return;
     ticking = true;
     requestAnimationFrame(update);
   }
@@ -310,20 +310,20 @@ if (video && btnReel) {
 })();
 
 
-(function introCubeToNavbar(){
+(function introCubeToNavbar() {
   const intro = document.querySelector('.intro');
   const overlayImg = document.getElementById('scrollCubeImg');
   const navTarget = document.getElementById('navCubeTarget');
-  if(!intro || !overlayImg || !navTarget) return;
+  if (!intro || !overlayImg || !navTarget) return;
 
   const root = document.documentElement;
   const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
   const lerp = (a, b, t) => a + (b - a) * t;
-  const easeInOut = (t) => t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2;
+  const easeInOut = (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 
   let ticking = false;
 
-  function getStart(){
+  function getStart() {
     // center of viewport
     return {
       x: window.innerWidth / 2,
@@ -332,7 +332,7 @@ if (video && btnReel) {
     };
   }
 
-  function getEnd(){
+  function getEnd() {
     const r = navTarget.getBoundingClientRect();
     return {
       x: r.left + r.width / 2,
@@ -341,7 +341,7 @@ if (video && btnReel) {
     };
   }
 
-  function update(){
+  function update() {
     const introRect = intro.getBoundingClientRect();
     const introTop = introRect.top;              // 0 at top of viewport
     const introHeight = Math.max(introRect.height, 1);
@@ -365,12 +365,12 @@ if (video && btnReel) {
 
     overlayImg.style.width = w + "px";
     overlayImg.style.transform =
-      `translate(-50%, -50%) translate(${x - window.innerWidth/2}px, ${y - window.innerHeight/2}px)
+      `translate(-50%, -50%) translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px)
        rotateZ(${rotZ}deg) rotateX(${rotX}deg)`;
 
     root.style.setProperty('--cubeOpacity', opacity.toFixed(3));
 
-    if (raw >= 0.98){
+    if (raw >= 0.98) {
       navTarget.classList.add('cube-ready');
     } else {
       navTarget.classList.remove('cube-ready');
@@ -379,8 +379,8 @@ if (video && btnReel) {
     ticking = false;
   }
 
-  function onScroll(){
-    if(ticking) return;
+  function onScroll() {
+    if (ticking) return;
     ticking = true;
     requestAnimationFrame(update);
   }
@@ -391,40 +391,40 @@ if (video && btnReel) {
 })();
 
 
-(function introCubeLoadAndMerge(){
+(function introCubeLoadAndMerge() {
   const intro = document.querySelector('.intro');
   const stage = document.querySelector('.intro__stage');
   const cube = document.getElementById('scrollCubeImg');
   const navTarget = document.getElementById('navCubeTarget');
-  if(!intro || !stage || !cube || !navTarget) return;
+  if (!intro || !stage || !cube || !navTarget) return;
 
   const root = document.documentElement;
-  const clamp = (v,min,max)=>Math.min(max,Math.max(min,v));
-  const lerp = (a,b,t)=>a+(b-a)*t;
+  const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
   const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
-  const easeInOut = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2;
+  const easeInOut = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 
   let introOffsetTop = 0;
   let vh = window.innerHeight;
   let loadedToCenterDone = false;
   let ticking = false;
 
-  function measure(){
+  function measure() {
     introOffsetTop = intro.offsetTop || 0;
     vh = window.innerHeight || 1;
   }
 
-  function getLogo(){
+  function getLogo() {
     const r = navTarget.getBoundingClientRect();
-    return { x: r.left + r.width/2, y: r.top + r.height/2, size: Math.max(r.width, 1) };
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2, size: Math.max(r.width, 1) };
   }
 
-  function getCenter(){
+  function getCenter() {
     const isMobile = window.innerWidth <= 768;
-  
+
     // push center slightly down on mobile so it feels centered under header
     const y = isMobile ? (window.innerHeight * 0.56) : (window.innerHeight * 0.50);
-  
+
     return {
       x: window.innerWidth / 2,
       y: y,
@@ -432,75 +432,75 @@ if (video && btnReel) {
     };
   }
 
-  function applyTransform(x,y,size,rotZ,rotX){
+  function applyTransform(x, y, size, rotZ, rotX) {
     cube.style.width = size + "px";
     cube.style.transform =
-      `translate(-50%, -50%) translate(${x - window.innerWidth/2}px, ${y - window.innerHeight/2}px)
+      `translate(-50%, -50%) translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px)
        rotateZ(${rotZ}deg) rotateX(${rotX}deg)`;
   }
 
   // Phase 1: On load -> logo to center
-  function animateLoadToCenter(){
+  function animateLoadToCenter() {
     const start = getLogo();
     const end = getCenter();
-  
+
     const duration = 1400; // ⬅ slower & premium
     const delay = 180;     // ⬅ small dramatic pause
-  
+
     const t0 = performance.now() + delay;
-  
+
     navTarget.classList.remove('cube-ready');
     stage.classList.remove('stage-hide');
     cube.classList.add('is-breathing');
     root.style.setProperty('--cubeOpacity', '0');
-  
-    function easeOutBack(t){
+
+    function easeOutBack(t) {
       const c1 = 1.70158;
       const c3 = c1 + 1;
       return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
     }
-  
-    function frame(now){
-      if(now < t0){
+
+    function frame(now) {
+      if (now < t0) {
         requestAnimationFrame(frame);
         return;
       }
-  
+
       const p = clamp((now - t0) / duration, 0, 1);
-  
+
       // mix smooth + overshoot
       const t = easeOutBack(p * 0.85);
-  
+
       const x = lerp(start.x, end.x, t);
       const y = lerp(start.y, end.y, t);
-  
+
       // scale overshoot then settle
       const s = lerp(start.size * 0.85, end.size * 1.04, t);
-  
+
       // cinematic rotation
       const rotZ = lerp(-120, 0, t);
       const rotX = lerp(26, 0, t);
-  
+
       // fade in smoothly
       const opacity = clamp(p * 1.25, 0, 1);
       root.style.setProperty('--cubeOpacity', opacity.toFixed(3));
-  
+
       applyTransform(x, y, s, rotZ, rotX);
-  
-      if(p < 1){
+
+      if (p < 1) {
         requestAnimationFrame(frame);
       } else {
         loadedToCenterDone = true;
         update(); // sync with scroll immediately
       }
     }
-  
+
     requestAnimationFrame(frame);
   }
 
   // Phase 2: Scroll -> center to logo (merge earlier, no delay)
-  function update(){
-    if(!loadedToCenterDone){ ticking = false; return; }
+  function update() {
+    if (!loadedToCenterDone) { ticking = false; return; }
 
     const y = window.scrollY || 0;
     const scrollIntoIntro = y - introOffsetTop;
@@ -526,7 +526,7 @@ if (video && btnReel) {
     const hideAt = 0.92;
 
     let opacity = 1;
-    if(raw >= showAt){
+    if (raw >= showAt) {
       navTarget.classList.add('cube-ready');
       const fadeT = clamp((raw - showAt) / (hideAt - showAt), 0, 1);
       opacity = 1 - fadeT;
@@ -535,10 +535,10 @@ if (video && btnReel) {
     }
 
     root.style.setProperty('--cubeOpacity', opacity.toFixed(3));
-    applyTransform(x,yy,s,rotZ,rotX);
+    applyTransform(x, yy, s, rotZ, rotX);
 
     // When intro is done, kill the fixed stage so hero never overlaps
-    if(raw >= 0.98){
+    if (raw >= 0.98) {
       stage.classList.add('stage-hide');
     } else {
       stage.classList.remove('stage-hide');
@@ -547,8 +547,8 @@ if (video && btnReel) {
     ticking = false;
   }
 
-  function onScroll(){
-    if(ticking) return;
+  function onScroll() {
+    if (ticking) return;
     ticking = true;
     requestAnimationFrame(update);
   }
@@ -562,56 +562,174 @@ if (video && btnReel) {
 })();
 
 // WhatsApp form submit (no alert, no conflict)
-(function leadFormToWhatsApp(){
+// (function leadFormToWhatsApp(){
+//   const form = document.getElementById("leadForm");
+//   const msg = document.getElementById("formMsg");
+//   if (!form) return;
+
+//   function showMessage(text, type){
+//     if (!msg) return;
+//     msg.textContent = text;
+//     msg.dataset.type = type || "info"; // we'll style via CSS
+//   }
+
+//   form.addEventListener("submit", function (e) {
+//     e.preventDefault();
+
+//     const name = form.querySelector('[name="name"]')?.value.trim();
+//     const email = form.querySelector('[name="email"]')?.value.trim();
+//     const phone = form.querySelector('[name="phone"]')?.value.trim();
+//     const link = form.querySelector('[name="link"]')?.value.trim();
+//     const goal = form.querySelector('[name="goal"]')?.value.trim();
+
+//     if (!name || !email || !link || !goal) {
+//       showMessage("Please fill all required fields (Name, Email, Instagram/Website, Goal).", "error");
+//       return;
+//     }
+
+//     showMessage("Opening WhatsApp…", "success");
+
+//     const message =
+// `🚀 *New Growth Audit Request — CtrlBox*
+
+// 👤 Name: ${name}
+// 📧 Email: ${email}
+// 📱 Phone: ${phone || "-"}
+// 🌐 Instagram/Website: ${link}
+
+// 🎯 Goal:
+// ${goal}
+
+// Sent from CtrlBox Website`;
+
+//     const whatsappNumber = "919148391386"; // no +
+//     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+//     // Open WA in a new tab
+//     window.open(whatsappURL, "_blank", "noopener,noreferrer");
+
+//     // Reset after opening
+//     form.reset();
+
+//     // Optional: clear message after a few seconds
+//     setTimeout(() => showMessage("", "info"), 3500);
+//   });
+// })();
+
+
+// Lead form → Google Forms (capture) + WhatsApp (instant message)
+(function leadFormToGoogleFormsAndWhatsApp() {
   const form = document.getElementById("leadForm");
   const msg = document.getElementById("formMsg");
   if (!form) return;
 
-  function showMessage(text, type){
+
+  // 1) Google Form formResponse URL (replace with yours)
+  // Example: https://docs.google.com/forms/d/e/1FAIpQLSeXXXX/formResponse
+  const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSfnsArJzk8cC_JwJS9Np_RGpHrTH8yKKRbuzAdUgN6Ov_FsiQ/formResponse";
+//https://docs.google.com/forms/u/1/d/e/1FAIpQLSfnsArJzk8cC_JwJS9Np_RGpHrTH8yKKRbuzAdUgN6Ov_FsiQ/formResponse
+  // 2) Map your form fields to Google Form entry IDs (replace with yours)
+  // Find these by View Page Source and searching "entry."
+  const ENTRY = {
+    name: "entry.564944832",
+    email: "entry.454009801",
+    phone: "entry.1005956171",
+    link: "entry.636711880",
+    goal: "entry.1262972412"
+  };
+
+  // 3) WhatsApp target (no +)
+  const WHATSAPP_NUMBER = "919148391386";
+
+  function showMessage(text, type) {
     if (!msg) return;
-    msg.textContent = text;
-    msg.dataset.type = type || "info"; // we'll style via CSS
+    msg.textContent = text || "";
+    msg.dataset.type = type || "info";
   }
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const name = form.querySelector('[name="name"]')?.value.trim();
-    const email = form.querySelector('[name="email"]')?.value.trim();
-    const phone = form.querySelector('[name="phone"]')?.value.trim();
-    const link = form.querySelector('[name="link"]')?.value.trim();
-    const goal = form.querySelector('[name="goal"]')?.value.trim();
-
-    if (!name || !email || !link || !goal) {
-      showMessage("Please fill all required fields (Name, Email, Instagram/Website, Goal).", "error");
-      return;
-    }
-
-    showMessage("Opening WhatsApp…", "success");
-
-    const message =
-`🚀 *New Growth Audit Request — CtrlBox*
+  function buildWhatsAppMessage({ name, email, phone, link, goal }) {
+    return (
+      `🚀 *New Growth Audit Request — CtrlBox*
 
 👤 Name: ${name}
 📧 Email: ${email}
 📱 Phone: ${phone || "-"}
-🌐 Instagram/Website: ${link}
+
+🌐 Instagram/Website:
+${link}
 
 🎯 Goal:
 ${goal}
 
-Sent from CtrlBox Website`;
+Sent from CtrlBox Website`
+    );
+  }
 
-    const whatsappNumber = "919148391386"; // no +
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  async function submitToGoogleForms({ name, email, phone, link, goal }) {
+    if (!GOOGLE_FORM_ACTION_URL || !GOOGLE_FORM_ACTION_URL.includes("/formResponse")) {
+      // Don’t block WhatsApp if Google URL not set, but warn in console
+      console.warn("Google Forms URL missing or not /formResponse");
+      return;
+    }
 
-    // Open WA in a new tab
-    window.open(whatsappURL, "_blank", "noopener,noreferrer");
+    const payload = new URLSearchParams();
+    payload.append(ENTRY.name, name);
+    payload.append(ENTRY.email, email);
+    payload.append(ENTRY.phone, phone || "-");
+    payload.append(ENTRY.link, link);
+    payload.append(ENTRY.goal, goal);
 
-    // Reset after opening
+    // Google Forms needs no-cors to submit from static sites
+    await fetch(GOOGLE_FORM_ACTION_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: payload.toString()
+    });
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: form.querySelector('[name="name"]')?.value.trim(),
+      email: form.querySelector('[name="email"]')?.value.trim(),
+      phone: form.querySelector('[name="phone"]')?.value.trim(),
+      link: form.querySelector('[name="link"]')?.value.trim(),
+      goal: form.querySelector('[name="goal"]')?.value.trim(),
+    };
+
+    if (!data.name || !data.email || !data.link || !data.goal) {
+      showMessage("Please fill all required fields (Name, Email, Instagram/Website, Goal).", "error");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    if (!emailRegex.test(data.email)) {
+      showMessage("Please enter a valid email address (example: name@company.com).", "error");
+      return;
+    }
+
+    showMessage("Saving your request…", "info");
+
+    // 1) Send to Google Sheet (best effort)
+    try {
+      await submitToGoogleForms(data);
+      showMessage("✅ Saved. Opening WhatsApp…", "success");
+    } catch (err) {
+      // Still continue to WhatsApp even if Sheets fails
+      console.warn("Google Forms submit failed:", err);
+      showMessage("Opening WhatsApp…", "success");
+    }
+
+    // 2) Open WhatsApp message
+    const waText = encodeURIComponent(buildWhatsAppMessage(data));
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+
+    // reset
     form.reset();
-
-    // Optional: clear message after a few seconds
     setTimeout(() => showMessage("", "info"), 3500);
   });
 })();
