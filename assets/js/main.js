@@ -112,6 +112,42 @@ onScroll();
 const year = document.querySelector("#year");
 if (year) year.textContent = new Date().getFullYear();
 
+// Reveal on scroll (premium subtle animation)
+(function revealOnScroll(){
+  const els = Array.from(document.querySelectorAll('.reveal'));
+  if (!els.length) return;
+
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    els.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { root: null, threshold: 0.12 });
+
+  els.forEach(el => io.observe(el));
+})();
+
+// Hide sticky CTA when user reaches contact section
+(function stickyCtaVisibility(){
+  const sticky = document.querySelector('.sticky-cta');
+  const contact = document.querySelector('#contact');
+  if (!sticky || !contact) return;
+  const io = new IntersectionObserver((entries) => {
+    const inView = entries.some(e => e.isIntersecting);
+    sticky.style.opacity = inView ? '0' : '1';
+    sticky.style.pointerEvents = inView ? 'none' : 'auto';
+  }, { threshold: 0.15 });
+  io.observe(contact);
+})();
+
 // Video controls
 const video = document.querySelector("#introVideo");
 const btnPlay = document.querySelector("#togglePlay");
