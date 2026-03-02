@@ -1262,6 +1262,7 @@ textarea:focus {
 .brand--footer .brand__logo {
   width: 80px;
   height: 55px;
+  opacity: 1;
 }
 
 .brand--footer .brand__wordmark {
