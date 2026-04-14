@@ -769,3 +769,184 @@ Sent from CtrlBox Website`
     setTimeout(() => showMessage("", "info"), 3500);
   });
 })();
+
+(function brandCarousel() {
+  const root = document.querySelector("[data-brand-carousel]");
+  if (!root) return;
+
+  const track = root.querySelector(".brand-carousel__track");
+  const prev = root.querySelector("[data-brand-prev]");
+  const next = root.querySelector("[data-brand-next]");
+  const dots = Array.from(root.querySelectorAll("[data-brand-dot]"));
+  const originalSlides = Array.from(root.querySelectorAll(".brand-slide"));
+  if (!track || !originalSlides.length) return;
+
+  let activeIndex = 0;
+  let animationFrame = null;
+  let paused = false;
+  let resumeTimer = null;
+  let originalWidth = 0;
+  let lastFrameTime = 0;
+  const speed = 42;
+
+  originalSlides.forEach((slide) => {
+    const clone = slide.cloneNode(true);
+    clone.dataset.clone = "true";
+    clone.setAttribute("aria-hidden", "true");
+    clone.setAttribute("tabindex", "-1");
+    track.appendChild(clone);
+  });
+
+  const slides = Array.from(track.querySelectorAll(".brand-slide"));
+
+  function getStep(index = 1) {
+    if (originalSlides.length < 2) return originalSlides[0]?.offsetWidth || track.clientWidth;
+    const safeIndex = Math.min(index, originalSlides.length - 1);
+    return originalSlides[safeIndex].offsetLeft - originalSlides[safeIndex - 1].offsetLeft;
+  }
+
+  function measure() {
+    originalWidth = slides[originalSlides.length]?.offsetLeft || track.scrollWidth / 2;
+  }
+
+  function syncDots(index) {
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle("is-active", dotIndex === index);
+      dot.setAttribute("aria-current", dotIndex === index ? "true" : "false");
+    });
+  }
+
+  function normalizeScroll() {
+    if (!originalWidth) return;
+
+    if (track.scrollLeft >= originalWidth) {
+      track.scrollLeft -= originalWidth;
+    } else if (track.scrollLeft < 0) {
+      track.scrollLeft += originalWidth;
+    }
+  }
+
+  function updateActiveFromScroll() {
+    const step = getStep();
+    if (!step || !originalWidth) return;
+    const normalizedLeft = ((track.scrollLeft % originalWidth) + originalWidth) % originalWidth;
+    const index = Math.round(normalizedLeft / step) % originalSlides.length;
+    activeIndex = Math.max(0, Math.min(originalSlides.length - 1, index));
+    syncDots(activeIndex);
+  }
+
+  function jumpTo(index) {
+    const safeIndex = (index + originalSlides.length) % originalSlides.length;
+    const target = originalSlides[safeIndex];
+    if (!target) return;
+    activeIndex = safeIndex;
+    track.scrollTo({ left: target.offsetLeft, behavior: "smooth" });
+    syncDots(activeIndex);
+  }
+
+  function loop(now) {
+    if (!lastFrameTime) lastFrameTime = now;
+    const delta = now - lastFrameTime;
+    lastFrameTime = now;
+
+    if (!paused && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      track.scrollLeft += (speed * delta) / 1000;
+      normalizeScroll();
+      updateActiveFromScroll();
+    }
+
+    animationFrame = window.requestAnimationFrame(loop);
+  }
+
+  function startLoop() {
+    if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    lastFrameTime = 0;
+    animationFrame = window.requestAnimationFrame(loop);
+  }
+
+  function stopLoop() {
+    if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    animationFrame = null;
+  }
+
+  function pauseAuto() {
+    paused = true;
+    if (resumeTimer) window.clearTimeout(resumeTimer);
+  }
+
+  function resumeAuto(delay = 0) {
+    if (resumeTimer) window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      paused = false;
+    }, delay);
+  }
+
+  function nudge(direction) {
+    pauseAuto();
+    jumpTo(activeIndex + direction);
+    resumeAuto(2200);
+  }
+
+  prev?.addEventListener("click", () => nudge(-1));
+  next?.addEventListener("click", () => nudge(1));
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      pauseAuto();
+      jumpTo(index);
+      resumeAuto(2200);
+    });
+  });
+
+  track.addEventListener("scroll", () => {
+    window.requestAnimationFrame(updateActiveFromScroll);
+  }, { passive: true });
+
+  root.addEventListener("focusin", pauseAuto);
+  root.addEventListener("focusout", () => resumeAuto(400));
+  track.addEventListener("pointerdown", pauseAuto, { passive: true });
+  track.addEventListener("touchstart", pauseAuto, { passive: true });
+  track.addEventListener("pointerup", () => resumeAuto(1600), { passive: true });
+  track.addEventListener("touchend", () => resumeAuto(1600), { passive: true });
+  track.addEventListener("pointercancel", () => resumeAuto(1600), { passive: true });
+  track.addEventListener("wheel", () => {
+    pauseAuto();
+    resumeAuto(1800);
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    measure();
+    jumpTo(activeIndex);
+  }, { passive: true });
+
+  measure();
+  syncDots(activeIndex);
+  startLoop();
+
+  window.addEventListener("beforeunload", () => {
+    stopLoop();
+    if (resumeTimer) window.clearTimeout(resumeTimer);
+  }, { passive: true });
+})();
+
+(function brandCardLinks() {
+  const links = Array.from(document.querySelectorAll(".brand-slide[data-external-url]"));
+  if (!links.length) return;
+
+  links.forEach((link) => {
+    const externalUrl = link.dataset.externalUrl?.trim();
+    const hasUrl = Boolean(externalUrl);
+
+    if (hasUrl) {
+      link.setAttribute("href", externalUrl);
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener noreferrer");
+      return;
+    }
+
+    link.setAttribute("aria-disabled", "true");
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+  });
+})();

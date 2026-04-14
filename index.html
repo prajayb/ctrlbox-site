@@ -177,24 +177,157 @@
       <div class="container">
         <div class="section__head">
           <h2 class="reveal">Trusted by growing brands</h2>
-          <!-- <p class="reveal">Replace these placeholders with client logos. Keep them uniform, greyscale by default, and
-            color on hover for a premium feel.</p> -->
+          <p class="reveal">A curated client reel with richer context, sharper presentation, and direct pathways to the pages we helped shape.</p>
         </div>
 
-        <div class="logo-grid" aria-label="Client logos">
+        <div class="brand-carousel reveal" data-brand-carousel>
+          <div class="brand-carousel__shell">
+            <div class="brand-carousel__intro">
+              <span class="brand-carousel__eyebrow">Client reel</span>
+              <p>Scroll through the brands, then click a card to open the live Instagram or website destination connected to that client.</p>
+            </div>
 
-          <div class="logo-tile reveal">
-            <img src="assets/logos/client1.png" alt="Pravin Holidays">
+            <div class="brand-carousel__controls" aria-label="Carousel controls">
+              <button class="brand-carousel__button" type="button" aria-label="Previous client" data-brand-prev>
+                <span aria-hidden="true">&larr;</span>
+              </button>
+              <button class="brand-carousel__button" type="button" aria-label="Next client" data-brand-next>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
           </div>
 
-          <div class="logo-tile reveal">
-            <img src="assets/logos/client2.png" alt="Mane Arts">
+          <div class="brand-carousel__viewport" aria-live="polite">
+            <div class="brand-carousel__track" aria-label="Client brand showcase">
+              <!-- Replace each data-external-url value below with the final Instagram or website URL for that client. -->
+              <a class="brand-slide" href="javascript:void(0)" data-external-url="https://www.pravinholidays.com" rel="noreferrer">
+                <article class="brand-card">
+                  <div class="brand-card__glow" aria-hidden="true"></div>
+                  <div class="brand-card__top">
+                    <div class="brand-card__logo">
+                      <img src="assets/logos/client1.png" alt="Pravin Holidays logo">
+                    </div>
+                    <div class="brand-card__meta">
+                      <span class="brand-card__tag">Social Media</span>
+                      <h3>Pravin Holidays</h3>
+                      <p>Cinematic travel storytelling, better message-to-lead flow, and a sharper front-facing brand presence.</p>
+                    </div>
+                  </div>
+                  <div class="brand-card__details">
+                    <div>
+                      <span class="brand-card__label">Primary Work</span>
+                      <strong>Content + Meta lead engine</strong>
+                    </div>
+                    <div>
+                      <span class="brand-card__label">Open</span>
+                      <strong>Instagram profile</strong>
+                    </div>
+                  </div>
+                  <div class="brand-card__footer">
+                    <span class="brand-card__pill">Travel</span>
+                    <span class="brand-card__link">View profile</span>
+                  </div>
+                </article>
+              </a>
+
+              <a class="brand-slide" href="javascript:void(0)" data-external-url="https://www.manearts.in" rel="noreferrer">
+                <article class="brand-card">
+                  <div class="brand-card__glow" aria-hidden="true"></div>
+                  <div class="brand-card__top">
+                    <div class="brand-card__logo">
+                      <img src="assets/logos/mane-arts-logo.webp" alt="Mane Arts logo">
+                    </div>
+                    <div class="brand-card__meta">
+                      <span class="brand-card__tag">Web Development</span>
+                      <h3>Mane Arts</h3>
+                      <p>A more elevated digital storefront with premium presentation, stronger visual rhythm, and clearer conversion cues.</p>
+                    </div>
+                  </div>
+                  <div class="brand-card__details">
+                    <div>
+                      <span class="brand-card__label">Primary Work</span>
+                      <strong>Website showcase build</strong>
+                    </div>
+                    <div>
+                      <span class="brand-card__label">Open</span>
+                      <strong>Live website</strong>
+                    </div>
+                  </div>
+                  <div class="brand-card__footer">
+                    <span class="brand-card__pill">Creative Retail</span>
+                    <span class="brand-card__link">Visit website</span>
+                  </div>
+                </article>
+              </a>
+
+              <a class="brand-slide" href="javascript:void(0)" data-external-url="https://www.manearts.in" rel="noreferrer">
+                <article class="brand-card">
+                  <div class="brand-card__glow" aria-hidden="true"></div>
+                  <div class="brand-card__top">
+                    <div class="brand-card__logo">
+                      <img src="assets/logos/client2.png" alt="JTradersHub logo">
+                    </div>
+                    <div class="brand-card__meta">
+                      <span class="brand-card__tag">Social Media</span>
+                      <h3>JTradersHub</h3>
+                      <p>Positioned to feel more authoritative with structured messaging, cleaner education-led content, and stronger trust cues.</p>
+                    </div>
+                  </div>
+                  <div class="brand-card__details">
+                    <div>
+                      <span class="brand-card__label">Primary Work</span>
+                      <strong>Brand trust system</strong>
+                    </div>
+                    <div>
+                      <span class="brand-card__label">Open</span>
+                      <strong>Instagram profile</strong>
+                    </div>
+                  </div>
+                  <div class="brand-card__footer">
+                    <span class="brand-card__pill">Education</span>
+                    <span class="brand-card__link">View profile</span>
+                  </div>
+                </article>
+              </a>
+
+              <a class="brand-slide" href="javascript:void(0)" data-external-url="https://www.manearts.in" rel="noreferrer">
+                <article class="brand-card brand-card--monogram">
+                  <div class="brand-card__glow" aria-hidden="true"></div>
+                  <div class="brand-card__top">
+                    <div class="brand-card__logo">
+                      <img src="assets/logos/client3.png" alt="Dr Pratima Dental Care logo">
+                    </div>
+                    <div class="brand-card__meta">
+                      <span class="brand-card__tag">Local Growth</span>
+                      <h3>Dr Pratima Dental Care</h3>
+                      <p>From identity to local lead capture, with a more credible online presence designed for high-intent discovery.</p>
+                    </div>
+                  </div>
+                  <div class="brand-card__details">
+                    <div>
+                      <span class="brand-card__label">Primary Work</span>
+                      <strong>Brand + local acquisition</strong>
+                    </div>
+                    <div>
+                      <span class="brand-card__label">Open</span>
+                      <strong>Website or profile</strong>
+                    </div>
+                  </div>
+                  <div class="brand-card__footer">
+                    <span class="brand-card__pill">Healthcare</span>
+                    <span class="brand-card__link">Open destination</span>
+                  </div>
+                </article>
+              </a>
+            </div>
           </div>
 
-          <div class="logo-tile reveal">
-            <img src="assets/logos/client3.png" alt="JTradersHub">
+          <div class="brand-carousel__dots" aria-label="Carousel pagination">
+            <button class="brand-carousel__dot is-active" type="button" aria-label="Go to client 1" data-brand-dot></button>
+            <button class="brand-carousel__dot" type="button" aria-label="Go to client 2" data-brand-dot></button>
+            <button class="brand-carousel__dot" type="button" aria-label="Go to client 3" data-brand-dot></button>
+            <button class="brand-carousel__dot" type="button" aria-label="Go to client 4" data-brand-dot></button>
           </div>
-
         </div>
       </div>
     </section>
